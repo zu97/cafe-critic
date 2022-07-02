@@ -27,3 +27,13 @@ ngx-star-rating label.star {
   font-size: 20px !important;
   float: none !important;
 }
+
+.stars-quality {
+  padding: 3px 0;
+  display: flex;
+  align-items: center;
+}
+
+.stars-quality bar-rating {
+  margin: 0 5px 3px 5px;
+}

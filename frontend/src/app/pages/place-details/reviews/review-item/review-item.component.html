@@ -1,0 +1,36 @@
+<mat-card>
+  <mat-card-title>
+    On {{ review.createdAt | date:'dd.MM.yyyy' }}, {{ review.user.displayName }} said:
+  </mat-card-title>
+  <mat-card-content>
+    <p>{{ review.review }}</p>
+  </mat-card-content>
+  <mat-divider inset></mat-divider>
+  <mat-card-content>
+    <div class="stars-quality">
+      <span>Quality of food:</span>
+      <bar-rating [rate]="review.foodQuality" [readOnly]="true"></bar-rating>
+    </div>
+    <div class="stars-quality">
+      <span>Service quality:</span>
+      <bar-rating [rate]="review.serviceQuality" [readOnly]="true"></bar-rating>
+    </div>
+    <div class="stars-quality">
+      <span>Interior:</span>
+      <bar-rating [rate]="review.interiorQuality" [readOnly]="true"></bar-rating>
+    </div>
+  </mat-card-content>
+  <ng-container *appHasRole="['admin']">
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      <button type="button"
+              mat-flat-button
+              color="warn"
+              (click)="onRemove()"
+              [disabled]="removeLoading | async"
+      >
+        <app-loader [isLoading]="removeLoading | async">Remove</app-loader>
+      </button>
+    </mat-card-actions>
+  </ng-container>
+</mat-card>

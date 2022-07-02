@@ -49,3 +49,15 @@ export const removePlaceFailure = createAction(
   '[Places] Remove Failure',
   props<{ error: null | string }>()
 );
+
+export const removePlaceReviewRequest = createAction(
+  '[Places] Remove Review Request',
+  props<{ placeId: string, reviewId: string }>()
+);
+export const removePlaceReviewSuccess = createAction(
+  '[Places] Remove Review Success'
+);
+export const removePlaceReviewFailure = createAction(
+  '[Places] Remove Review Failure',
+  props<{ error: null | string }>()
+);

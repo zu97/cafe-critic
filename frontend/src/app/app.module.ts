@@ -36,6 +36,8 @@ import { PlacesComponent } from './pages/places/places.component';
 import { PlaceItemComponent } from './pages/places/place-item/place-item.component';
 import { AddPlaceComponent } from './pages/add-place/add-place.component';
 import { PlaceDetailsComponent } from './pages/place-details/place-details.component';
+import { ReviewsComponent } from './pages/place-details/reviews/reviews.component';
+import { ReviewItemComponent } from './pages/place-details/reviews/review-item/review-item.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { PlaceDetailsComponent } from './pages/place-details/place-details.compo
     PlaceItemComponent,
     AddPlaceComponent,
     PlaceDetailsComponent,
+    ReviewsComponent,
+    ReviewItemComponent,
   ],
   imports: [
     BrowserModule,

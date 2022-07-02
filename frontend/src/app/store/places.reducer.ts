@@ -12,6 +12,9 @@ import {
   getPlaceSuccess,
   removePlaceFailure,
   removePlaceRequest,
+  removePlaceReviewFailure,
+  removePlaceReviewRequest,
+  removePlaceReviewSuccess,
   removePlaceSuccess
 } from './places.actions';
 
@@ -26,6 +29,8 @@ const initialState: PlacesState = {
   addPlaceError: null,
   removeLoading: false,
   removeError: null,
+  removeReviewLoading: false,
+  removeReviewError: null,
 };
 
 export const placesReducer = createReducer(
@@ -45,5 +50,13 @@ export const placesReducer = createReducer(
   on(removePlaceRequest, (state, { id }) => ({ ...state, removeLoading: id, removeError: null })),
   on(removePlaceSuccess, state => ({ ...state, removeLoading: false })),
   on(removePlaceFailure, (state, { error }) => ({ ...state, removeLoading: false, removeError: error })),
+
+  on(removePlaceReviewRequest, state => ({ ...state, removeReviewLoading: true, removeReviewError: null })),
+  on(removePlaceReviewSuccess, state => ({ ...state, removeReviewLoading: false })),
+  on(removePlaceReviewFailure, (state, { error }) => ({
+    ...state,
+    removeReviewLoading: false,
+    removeReviewError: error
+  })),
 
 );

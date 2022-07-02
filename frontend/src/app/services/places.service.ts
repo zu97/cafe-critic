@@ -33,4 +33,8 @@ export class PlacesService {
     return this.http.delete(env.apiUrl + '/places/' + id);
   }
 
+  removePlaceReview(placeId: string, reviewId: string) {
+    return this.http.delete(env.apiUrl + '/places/' + placeId + '/reviews/' + reviewId);
+  }
+
 }

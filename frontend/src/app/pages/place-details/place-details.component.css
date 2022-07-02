@@ -5,3 +5,7 @@
   max-height: 200px;
   margin: 0 0 0 16px !important;
 }
+
+.stars-quality {
+  justify-content: center;
+}

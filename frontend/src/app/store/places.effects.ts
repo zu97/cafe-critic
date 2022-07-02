@@ -17,6 +17,9 @@ import {
   getPlaceSuccess,
   removePlaceFailure,
   removePlaceRequest,
+  removePlaceReviewFailure,
+  removePlaceReviewRequest,
+  removePlaceReviewSuccess,
   removePlaceSuccess
 } from './places.actions';
 import { PlacesService } from '../services/places.service';
@@ -64,6 +67,15 @@ export class PlacesEffects {
       map(() => removePlaceSuccess()),
       tap(() => this.store.dispatch(fetchPlacesRequest())),
       this.helpersService.catchServerError(removePlaceFailure),
+    )),
+  ));
+
+  removePlaceReview = createEffect(() => this.actions.pipe(
+    ofType(removePlaceReviewRequest),
+    mergeMap(({ placeId, reviewId }) => this.placesService.removePlaceReview(placeId, reviewId).pipe(
+      map(() => removePlaceReviewSuccess()),
+      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      this.helpersService.catchServerError(removePlaceReviewFailure),
     )),
   ));
 
