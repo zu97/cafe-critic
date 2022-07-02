@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Place } from '../../models/place.model';
 import { Store } from '@ngrx/store';
@@ -14,10 +14,10 @@ import { environment } from '../../../environments/environment';
   templateUrl: './place-details.component.html',
   styleUrls: ['./place-details.component.css']
 })
-export class PlaceDetailsComponent implements OnInit {
+export class PlaceDetailsComponent implements OnInit, OnDestroy {
   place: Observable<null | Place>;
 
-  isAllowSendReview = false;
+  reviewId = '';
   galleryOptionsAdmin: NgxGalleryOptions[] = [];
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
@@ -91,7 +91,7 @@ export class PlaceDetailsComponent implements OnInit {
       return review.user._id === this.userData?._id
     });
 
-    this.isAllowSendReview = !checkUserReview;
+    this.reviewId = checkUserReview ? checkUserReview._id : '';
   }
 
   loadingGalleryImages(): void {
@@ -115,6 +115,11 @@ export class PlaceDetailsComponent implements OnInit {
       placeId: this.placeData._id,
       photoId: galleryPhoto._id,
     }));
+  }
+
+  ngOnDestroy(): void {
+    this.placeSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 }

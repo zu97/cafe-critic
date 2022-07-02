@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { PlaceReview } from '../../../../models/place.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/types';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { removePlaceReviewRequest } from '../../../../store/places.actions';
 
 @Component({
@@ -20,8 +20,10 @@ export class ReviewItemComponent {
   constructor(
     private store: Store<AppState>,
   ) {
-    this.removeLoading = store.select((state) => state.places.removeReviewLoading);
     this.removeError = store.select((state) => state.places.removeReviewError);
+    this.removeLoading = store.select((state) => state.places.removeReviewLoading).pipe(
+      map((isLoading) => isLoading === this.review._id),
+    );
   }
 
   onRemove(): void {

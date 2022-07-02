@@ -1,8 +1,17 @@
 <mat-card>
   <mat-card-title>Add review</mat-card-title>
-  <mat-card-content *ngIf="!allowReview; else showReviewForm">
+  <mat-card-content *ngIf="reviewId; else showReviewForm">
     <p>You have already left a review for this place</p>
     <p>To leave a new review, delete the previous review</p>
+
+    <button type="button"
+            mat-flat-button
+            color="warn"
+            (click)="onRemove()"
+            [disabled]="removeLoading | async"
+    >
+      <app-loader [isLoading]="removeLoading | async">Remove</app-loader>
+    </button>
   </mat-card-content>
 </mat-card>
 

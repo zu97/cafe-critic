@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/types';
-import { addPlaceReviewRequest } from '../../../store/places.actions';
+import { addPlaceReviewRequest, removePlaceReviewRequest } from '../../../store/places.actions';
 
 @Component({
   selector: 'app-add-review',
@@ -12,11 +12,13 @@ import { addPlaceReviewRequest } from '../../../store/places.actions';
 })
 export class AddReviewComponent implements OnInit, OnDestroy {
   @Input() id!: string;
-  @Input() allowReview!: boolean;
+  @Input() reviewId!: string;
   @ViewChild('f') form!: NgForm;
 
   addReviewLoading: Observable<boolean>;
   addReviewError: Observable<null | string>;
+  removeLoading: Observable<boolean>;
+  removeError: Observable<null | string>;
 
   private loadingSub!: Subscription;
 
@@ -25,6 +27,10 @@ export class AddReviewComponent implements OnInit, OnDestroy {
   ) {
     this.addReviewLoading = store.select((state) => state.places.addReviewLoading);
     this.addReviewError = store.select((state) => state.places.addReviewError);
+    this.removeError = store.select((state) => state.places.removeReviewError);
+    this.removeLoading = store.select((state) => state.places.removeReviewLoading).pipe(
+      map((isLoading) => isLoading === this.reviewId),
+    );
   }
 
   ngOnInit(): void {
@@ -34,6 +40,14 @@ export class AddReviewComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  onRemove(): void {
+    this.store.dispatch(removePlaceReviewRequest({
+      placeId: this.id,
+      reviewId: this.reviewId,
+    }));
+  }
+
 
   onSubmit(): void {
     if (this.form.invalid) {
