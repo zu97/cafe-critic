@@ -14,6 +14,9 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { CenteredCardComponent } from './ui/centered-card/centered-card.component';
 import { FileInputComponent } from './ui/file-input/file-input.component';
 import { LoaderComponent } from './ui/loader/loader.component';
+import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
+import { IsAuthDirective } from './directives/is-auth.directive';
+import { HasRoleDirective } from './directives/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { LoaderComponent } from './ui/loader/loader.component';
     CenteredCardComponent,
     FileInputComponent,
     LoaderComponent,
+    ValidateIdenticalDirective,
+    IsAuthDirective,
+    HasRoleDirective,
   ],
   imports: [
     BrowserModule,
