@@ -6,13 +6,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AddPlaceComponent } from './pages/add-place/add-place.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PlacesComponent } from './pages/places/places.component';
+import { PlaceDetailsComponent } from './pages/place-details/place-details.component';
 
 const routes: Routes = [
   { path: '', component: PlacesComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+
   { path: 'places', component: PlacesComponent },
   { path: 'places/new', component: AddPlaceComponent, canActivate: [AuthGuardService] },
+  { path: 'places/:place', component: PlaceDetailsComponent },
+
   { path: '**', component: PageNotFoundComponent },
 ];
 

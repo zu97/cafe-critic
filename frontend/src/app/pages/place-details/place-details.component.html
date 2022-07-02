@@ -1,0 +1,38 @@
+<app-loader [isLoading]="isLoading | async" size="lg">
+  <div fxLayout="column" fxLayoutGap="16px" *ngIf="place | async as $place">
+    <mat-card fxLayout="row" fxLayoutAlign="space-between stretch">
+      <mat-card-content>
+        <mat-card-title>{{ $place.title }}</mat-card-title>
+        <p>{{ $place.description }}</p>
+      </mat-card-content>
+      <div>
+        <img mat-card-image
+             [src]="$place.photo | image"
+             [alt]="$place.title"
+             class="place-img"
+        />
+      </div>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Ratings</mat-card-title>
+      <mat-card-content>
+        <div class="stars-quality">
+          <span>Overall:</span>
+          <bar-rating [rate]="$place.overallQuality" [readOnly]="true"></bar-rating>
+        </div>
+        <div class="stars-quality">
+          <span>Quality of food:</span>
+          <bar-rating [rate]="$place.foodQuality" [readOnly]="true"></bar-rating>
+        </div>
+        <div class="stars-quality">
+          <span>Service quality:</span>
+          <bar-rating [rate]="$place.serviceQuality" [readOnly]="true"></bar-rating>
+        </div>
+        <div class="stars-quality">
+          <span>Interior:</span>
+          <bar-rating [rate]="$place.interiorQuality" [readOnly]="true"></bar-rating>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</app-loader>

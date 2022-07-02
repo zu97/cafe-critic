@@ -35,6 +35,7 @@ import { ImagePipes } from './pipes/image.pipe';
 import { PlacesComponent } from './pages/places/places.component';
 import { PlaceItemComponent } from './pages/places/place-item/place-item.component';
 import { AddPlaceComponent } from './pages/add-place/add-place.component';
+import { PlaceDetailsComponent } from './pages/place-details/place-details.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { AddPlaceComponent } from './pages/add-place/add-place.component';
     PlacesComponent,
     PlaceItemComponent,
     AddPlaceComponent,
+    PlaceDetailsComponent,
   ],
   imports: [
     BrowserModule,

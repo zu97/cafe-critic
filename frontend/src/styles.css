@@ -2,3 +2,28 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.header {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #d1d1d1;
+}
+
+.header h1 {
+  margin-bottom: 0;
+}
+
+.error {
+  background-color: #f44336;
+  padding: 20px;
+  color: white;
+  margin-bottom: 15px;
+  text-align: center;
+  border-radius: 2px;
+}
+
+ngx-star-rating label.star {
+  padding: 8px !important;
+  font-size: 20px !important;
+  float: none !important;
+}
