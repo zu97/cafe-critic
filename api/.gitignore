@@ -1,3 +1,6 @@
 node_modules
 public/uploads/*
 !public/uploads/.gitkeep
+!public/uploads/place-1.jpg
+!public/uploads/place-2.jpg
+!public/uploads/place-3.jpg
