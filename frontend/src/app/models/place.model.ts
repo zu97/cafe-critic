@@ -28,3 +28,15 @@ export interface PlaceGalleryPhoto {
   user: string;
   photo: string;
 }
+
+export interface AddPlaceData {
+  [key: string]: any;
+  title: string;
+  description: string;
+  photo: string;
+  agree: boolean;
+}
+
+export interface AddPlaceError {
+  error: string;
+}

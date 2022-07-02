@@ -32,6 +32,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ImagePipes } from './pipes/image.pipe';
 import { PlacesComponent } from './pages/places/places.component';
 import { PlaceItemComponent } from './pages/places/place-item/place-item.component';
+import { AddPlaceComponent } from './pages/add-place/add-place.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PlaceItemComponent } from './pages/places/place-item/place-item.compone
     ImagePipes,
     PlacesComponent,
     PlaceItemComponent,
+    AddPlaceComponent,
   ],
   imports: [
     BrowserModule,

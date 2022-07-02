@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
-import { Place } from '../models/place.model';
+import { AddPlaceData, Place } from '../models/place.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +18,15 @@ export class PlacesService {
 
   getPlace(id: string) {
     return this.http.get<Place>(env.apiUrl + '/places/' + id);
+  }
+
+  addPlace(placeData: AddPlaceData) {
+    const formData = new FormData();
+    Object.keys(placeData).forEach((data) => {
+      formData.append(data, placeData[data]);
+    });
+
+    return this.http.post<Place>(env.apiUrl + '/places', formData);
   }
 
 }
