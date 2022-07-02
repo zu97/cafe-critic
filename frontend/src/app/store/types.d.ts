@@ -20,6 +20,8 @@ export type PlacesState = {
   addPlaceError: null | AddPlaceError,
   removeLoading: false | string,
   removeError: null | string,
+  addReviewLoading: boolean,
+  addReviewError: null | string,
   removeReviewLoading: boolean,
   removeReviewError: null | string,
 };

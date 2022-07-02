@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
-import { AddPlaceData, Place } from '../models/place.model';
+import { AddPlaceData, AddPlaceReviewData, Place } from '../models/place.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,10 @@ export class PlacesService {
 
   removePlace(id: string) {
     return this.http.delete(env.apiUrl + '/places/' + id);
+  }
+
+  addPlaceReview(placeId: string, reviewData: AddPlaceReviewData) {
+    return this.http.post<Place>(env.apiUrl + '/places/' + placeId + '/reviews', reviewData);
   }
 
   removePlaceReview(placeId: string, reviewId: string) {

@@ -1,0 +1,61 @@
+<mat-card>
+  <mat-card-title>Add review</mat-card-title>
+  <mat-card-content *ngIf="!allowReview; else showReviewForm">
+    <p>You have already left a review for this place</p>
+    <p>To leave a new review, delete the previous review</p>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #showReviewForm>
+  <form (ngSubmit)="onSubmit()"
+        fxLayout="column"
+        #f="ngForm"
+  >
+    <div class="stars-quality">
+      <span>Quality of food:</span>
+      <bar-rating name="foodQuality"
+                  ngModel
+                  [required]="true"
+      ></bar-rating>
+    </div>
+    <div class="stars-quality">
+      <span>Service quality:</span>
+      <bar-rating name="serviceQuality"
+                  ngModel
+                  [required]="true"
+      ></bar-rating>
+    </div>
+    <div class="stars-quality">
+      <span>Interior:</span>
+      <bar-rating name="interiorQuality"
+                  ngModel
+                  [required]="true"
+      ></bar-rating>
+    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Review text</mat-label>
+      <textarea name="review"
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                ngModel
+                #review="ngModel"
+                required
+      ></textarea>
+      <mat-error *ngIf="review.touched && review.hasError('required')">
+        Field is required
+      </mat-error>
+    </mat-form-field>
+    <div fxLayout="column" fxLayoutGap="16px">
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="f.invalid || (addReviewLoading | async)"
+      >
+        <app-loader [isLoading]="addReviewLoading | async" size="sm">
+          Submit review
+        </app-loader>
+      </button>
+    </div>
+  </form>
+</ng-template>

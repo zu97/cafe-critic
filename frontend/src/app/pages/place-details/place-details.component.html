@@ -24,7 +24,7 @@
         <div class="stars-quality">
           <span>Quality of food:</span>
           <bar-rating [rate]="$place.foodQuality" [readOnly]="true"></bar-rating>
-          <strong>{{ $place.overallQuality }}</strong>
+          <strong>{{ $place.foodQuality }}</strong>
         </div>
         <div class="stars-quality">
           <span>Service quality:</span>
@@ -39,5 +39,6 @@
       </mat-card-content>
     </mat-card>
     <app-reviews [place]="$place" fxLayout="column" fxLayoutGap="16px"></app-reviews>
+    <app-add-review [id]="$place._id" [allowReview]="isAllowSendReview" *appIsAuth="true"></app-add-review>
   </div>
 </app-loader>

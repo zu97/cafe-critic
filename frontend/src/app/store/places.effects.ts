@@ -8,6 +8,9 @@ import { AppState } from './types';
 import {
   addPlaceFailure,
   addPlaceRequest,
+  addPlaceReviewFailure,
+  addPlaceReviewRequest,
+  addPlaceReviewSuccess,
   addPlaceSuccess,
   fetchPlacesFailure,
   fetchPlacesRequest,
@@ -67,6 +70,15 @@ export class PlacesEffects {
       map(() => removePlaceSuccess()),
       tap(() => this.store.dispatch(fetchPlacesRequest())),
       this.helpersService.catchServerError(removePlaceFailure),
+    )),
+  ));
+
+  addPlaceReview = createEffect(() => this.actions.pipe(
+    ofType(addPlaceReviewRequest),
+    mergeMap(({ placeId, reviewData }) => this.placesService.addPlaceReview(placeId, reviewData).pipe(
+      map(() => addPlaceReviewSuccess()),
+      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      this.helpersService.catchServerError(addPlaceReviewFailure),
     )),
   ));
 

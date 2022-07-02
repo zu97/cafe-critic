@@ -3,6 +3,9 @@ import { createReducer, on } from '@ngrx/store';
 import {
   addPlaceFailure,
   addPlaceRequest,
+  addPlaceReviewFailure,
+  addPlaceReviewRequest,
+  addPlaceReviewSuccess,
   addPlaceSuccess,
   fetchPlacesFailure,
   fetchPlacesRequest,
@@ -29,6 +32,8 @@ const initialState: PlacesState = {
   addPlaceError: null,
   removeLoading: false,
   removeError: null,
+  addReviewLoading: false,
+  addReviewError: null,
   removeReviewLoading: false,
   removeReviewError: null,
 };
@@ -50,6 +55,10 @@ export const placesReducer = createReducer(
   on(removePlaceRequest, (state, { id }) => ({ ...state, removeLoading: id, removeError: null })),
   on(removePlaceSuccess, state => ({ ...state, removeLoading: false })),
   on(removePlaceFailure, (state, { error }) => ({ ...state, removeLoading: false, removeError: error })),
+
+  on(addPlaceReviewRequest, state => ({ ...state, addReviewLoading: true, addReviewError: null })),
+  on(addPlaceReviewSuccess, state => ({ ...state, addReviewLoading: false })),
+  on(addPlaceReviewFailure, (state, { error }) => ({ ...state, addReviewLoading: false, addReviewError: error })),
 
   on(removePlaceReviewRequest, state => ({ ...state, removeReviewLoading: true, removeReviewError: null })),
   on(removePlaceReviewSuccess, state => ({ ...state, removeReviewLoading: false })),

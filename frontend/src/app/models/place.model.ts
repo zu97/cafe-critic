@@ -7,8 +7,8 @@ export interface Place {
   foodQuality: number;
   serviceQuality: number;
   interiorQuality: number;
-  gallery: PlaceGalleryPhoto[];
   reviews: PlaceReview[];
+  gallery: PlaceGalleryPhoto[];
 }
 
 export interface PlaceReview {
@@ -21,6 +21,7 @@ export interface PlaceReview {
   foodQuality: number;
   serviceQuality: number;
   interiorQuality: number;
+  createdAt: Date;
 }
 
 export interface PlaceGalleryPhoto {
@@ -39,4 +40,11 @@ export interface AddPlaceData {
 
 export interface AddPlaceError {
   error: string;
+}
+
+export interface AddPlaceReviewData {
+  review: string;
+  foodQuality: number;
+  serviceQuality: number;
+  interiorQuality: number;
 }
