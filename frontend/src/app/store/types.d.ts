@@ -22,11 +22,11 @@ export type PlacesState = {
   removeError: null | string,
   addReviewLoading: boolean,
   addReviewError: null | string,
-  removeReviewLoading: boolean,
+  removeReviewLoading: false | string,
   removeReviewError: null | string,
   addPhotoLoading: boolean,
   addPhotoError: null | string,
-  removePhotoLoading: boolean,
+  removePhotoLoading: false | string,
   removePhotoError: null | string,
 };
 

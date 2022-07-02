@@ -59,7 +59,10 @@ export class PlacesEffects {
     ofType(addPlaceRequest),
     mergeMap(({ placeData }) => this.placesService.addPlace(placeData).pipe(
       map(() => addPlaceSuccess()),
-      tap(() => void this.router.navigate(['/'])),
+      tap(() => {
+        this.helpersService.openSnackBar('Place successfully added');
+        void this.router.navigate(['/']);
+      }),
       this.helpersService.catchServerError(addPlaceFailure),
     )),
   ));
@@ -68,7 +71,10 @@ export class PlacesEffects {
     ofType(removePlaceRequest),
     mergeMap(({ id }) => this.placesService.removePlace(id).pipe(
       map(() => removePlaceSuccess()),
-      tap(() => this.store.dispatch(fetchPlacesRequest())),
+      tap(() => {
+        this.helpersService.openSnackBar('Place successfully removed');
+        this.store.dispatch(fetchPlacesRequest());
+      }),
       this.helpersService.catchServerError(removePlaceFailure),
     )),
   ));
@@ -77,7 +83,10 @@ export class PlacesEffects {
     ofType(addPlaceReviewRequest),
     mergeMap(({ placeId, reviewData }) => this.placesService.addPlaceReview(placeId, reviewData).pipe(
       map(() => addPlaceReviewSuccess()),
-      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      tap(() => {
+        this.helpersService.openSnackBar('Review successfully added');
+        this.store.dispatch(getPlaceRequest({ id: placeId }));
+      }),
       this.helpersService.catchServerError(addPlaceReviewFailure),
     )),
   ));
@@ -86,7 +95,10 @@ export class PlacesEffects {
     ofType(removePlaceReviewRequest),
     mergeMap(({ placeId, reviewId }) => this.placesService.removePlaceReview(placeId, reviewId).pipe(
       map(() => removePlaceReviewSuccess()),
-      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      tap(() => {
+        this.helpersService.openSnackBar('Review successfully removed');
+        this.store.dispatch(getPlaceRequest({ id: placeId }));
+      }),
       this.helpersService.catchServerError(removePlaceReviewFailure),
     )),
   ));
@@ -95,7 +107,10 @@ export class PlacesEffects {
     ofType(addPlaceGalleryPhotoRequest),
     mergeMap(({ placeId, photoData }) => this.placesService.addPlaceGalleryPhoto(placeId, photoData).pipe(
       map(() => addPlaceGalleryPhotoSuccess()),
-      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      tap(() => {
+        this.helpersService.openSnackBar('Photo successfully uploaded');
+        this.store.dispatch(getPlaceRequest({ id: placeId }));
+      }),
       this.helpersService.catchServerError(addPlaceGalleryPhotoFailure),
     )),
   ));
@@ -104,7 +119,10 @@ export class PlacesEffects {
     ofType(removePlaceGalleryPhotoRequest),
     mergeMap(({ placeId, photoId }) => this.placesService.removePlaceGalleryPhoto(placeId, photoId).pipe(
       map(() => removePlaceGalleryPhotoSuccess()),
-      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      tap(() => {
+        this.helpersService.openSnackBar('Photo successfully removed');
+        this.store.dispatch(getPlaceRequest({ id: placeId }));
+      }),
       this.helpersService.catchServerError(removePlaceGalleryPhotoFailure),
     )),
   ));

@@ -64,7 +64,7 @@ export const placesReducer = createReducer(
   on(addPlaceReviewSuccess, state => ({ ...state, addReviewLoading: false })),
   on(addPlaceReviewFailure, (state, { error }) => ({ ...state, addReviewLoading: false, addReviewError: error })),
 
-  on(removePlaceReviewRequest, state => ({ ...state, removeReviewLoading: true, removeReviewError: null })),
+  on(removePlaceReviewRequest, (state, { reviewId }) => ({ ...state, removeReviewLoading: reviewId, removeReviewError: null })),
   on(removePlaceReviewSuccess, state => ({ ...state, removeReviewLoading: false })),
   on(removePlaceReviewFailure, (state, { error }) => ({
     ...state,
@@ -76,7 +76,7 @@ export const placesReducer = createReducer(
   on(addPlaceGalleryPhotoSuccess, state => ({ ...state, addPhotoLoading: false })),
   on(addPlaceGalleryPhotoFailure, (state, { error }) => ({ ...state, addPhotoLoading: false, addPhotoError: error })),
 
-  on(removePlaceGalleryPhotoRequest, state => ({ ...state, removePhotoLoading: true, removePhotoError: null })),
+  on(removePlaceGalleryPhotoRequest, (state, { photoId }) => ({ ...state, removePhotoLoading: photoId, removePhotoError: null })),
   on(removePlaceGalleryPhotoSuccess, state => ({ ...state, removePhotoLoading: false })),
   on(removePlaceGalleryPhotoFailure, (state, { error }) => ({ ...state, removePhotoLoading: false, removePhotoError: error })),
 
