@@ -1,0 +1,39 @@
+<mat-card>
+  <mat-card-title>Upload new photo</mat-card-title>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()"
+          fxLayout="column"
+          #f="ngForm"
+    >
+      <mat-form-field appearance="outline">
+        <mat-label>Photo</mat-label>
+        <app-file-input name="photo"
+                        accept="image/png, image/gif, image/jpeg"
+                        ngModel
+                        #photo="ngModel"
+                        required
+        ></app-file-input>
+        <mat-error *ngIf="photo.touched && photo.hasError('required')">
+          Field is required
+        </mat-error>
+        <mat-error *ngIf="photo.touched && photo.hasError('accept')">
+          An avatar with this extension cannot be uploaded
+        </mat-error>
+        <mat-error *ngIf="photo.touched && photo.hasError('serverError')">
+          {{ photo.getError('serverError') }}
+        </mat-error>
+      </mat-form-field>
+      <div fxLayout="column" fxLayoutGap="16px">
+        <button type="submit"
+                mat-raised-button
+                color="primary"
+                [disabled]="f.invalid || (addPhotoLoading | async)"
+        >
+          <app-loader [isLoading]="addPhotoLoading | async" size="sm">
+            Upload
+          </app-loader>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -2,6 +2,9 @@ import { PlacesState } from './types';
 import { createReducer, on } from '@ngrx/store';
 import {
   addPlaceFailure,
+  addPlaceGalleryPhotoFailure,
+  addPlaceGalleryPhotoRequest,
+  addPlaceGalleryPhotoSuccess,
   addPlaceRequest,
   addPlaceReviewFailure,
   addPlaceReviewRequest,
@@ -36,6 +39,8 @@ const initialState: PlacesState = {
   addReviewError: null,
   removeReviewLoading: false,
   removeReviewError: null,
+  addPhotoLoading: false,
+  addPhotoError: null,
 };
 
 export const placesReducer = createReducer(
@@ -67,5 +72,9 @@ export const placesReducer = createReducer(
     removeReviewLoading: false,
     removeReviewError: error
   })),
+
+  on(addPlaceGalleryPhotoRequest, state => ({ ...state, addPhotoLoading: true, addPhotoError: null })),
+  on(addPlaceGalleryPhotoSuccess, state => ({ ...state, addPhotoLoading: false })),
+  on(addPlaceGalleryPhotoFailure, (state, { error }) => ({ ...state, addPhotoLoading: false, addPhotoError: error })),
 
 );

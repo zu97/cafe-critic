@@ -39,6 +39,7 @@ import { PlaceDetailsComponent } from './pages/place-details/place-details.compo
 import { ReviewsComponent } from './pages/place-details/reviews/reviews.component';
 import { ReviewItemComponent } from './pages/place-details/reviews/review-item/review-item.component';
 import { AddReviewComponent } from './pages/place-details/add-review/add-review.component';
+import { AddPhotoComponent } from './pages/place-details/add-photo/add-photo.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { AddReviewComponent } from './pages/place-details/add-review/add-review.
     ReviewsComponent,
     ReviewItemComponent,
     AddReviewComponent,
+    AddPhotoComponent,
   ],
   imports: [
     BrowserModule,

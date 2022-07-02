@@ -48,3 +48,8 @@ export interface AddPlaceReviewData {
   serviceQuality: number;
   interiorQuality: number;
 }
+
+export interface AddPlaceGalleryPhotoData {
+  [key: string]: any;
+  photo: string;
+}

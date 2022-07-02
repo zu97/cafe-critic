@@ -40,5 +40,6 @@
     </mat-card>
     <app-reviews [place]="$place" fxLayout="column" fxLayoutGap="16px"></app-reviews>
     <app-add-review [id]="$place._id" [allowReview]="isAllowSendReview" *appIsAuth="true"></app-add-review>
+    <app-add-photo [id]="$place._id" *appIsAuth="true"></app-add-photo>
   </div>
 </app-loader>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
-import { AddPlaceData, AddPlaceReviewData, Place } from '../models/place.model';
+import { AddPlaceData, AddPlaceGalleryPhotoData, AddPlaceReviewData, Place } from '../models/place.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +39,15 @@ export class PlacesService {
 
   removePlaceReview(placeId: string, reviewId: string) {
     return this.http.delete(env.apiUrl + '/places/' + placeId + '/reviews/' + reviewId);
+  }
+
+  addPlaceGalleryPhoto(placeId: string, photoData: AddPlaceGalleryPhotoData) {
+    const formData = new FormData();
+    Object.keys(photoData).forEach((data) => {
+      formData.append(data, photoData[data]);
+    });
+
+    return this.http.post<Place>(env.apiUrl + '/places/' + placeId + '/gallery', formData);
   }
 
 }

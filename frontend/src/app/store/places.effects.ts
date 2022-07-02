@@ -7,6 +7,9 @@ import { Store } from '@ngrx/store';
 import { AppState } from './types';
 import {
   addPlaceFailure,
+  addPlaceGalleryPhotoFailure,
+  addPlaceGalleryPhotoRequest,
+  addPlaceGalleryPhotoSuccess,
   addPlaceRequest,
   addPlaceReviewFailure,
   addPlaceReviewRequest,
@@ -90,5 +93,15 @@ export class PlacesEffects {
       this.helpersService.catchServerError(removePlaceReviewFailure),
     )),
   ));
+
+  addPlaceGalleryPhoto = createEffect(() => this.actions.pipe(
+    ofType(addPlaceGalleryPhotoRequest),
+    mergeMap(({ placeId, photoData }) => this.placesService.addPlaceGalleryPhoto(placeId, photoData).pipe(
+      map(() => addPlaceGalleryPhotoSuccess()),
+      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      this.helpersService.catchServerError(addPlaceGalleryPhotoFailure),
+    )),
+  ));
+
 
 }
