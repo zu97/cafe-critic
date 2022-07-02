@@ -93,13 +93,21 @@ PlaceSchema.pre('save', async function (next) {
     return next();
   }
 
-  const foodQualityData = this.reviews.map((review) => review['foodQuality']);
-  const serviceQualityData = this.reviews.map((review) => review['serviceQuality']);
-  const interiorQualityData = this.reviews.map((review) => review['interiorQuality']);
+  let foodQuality = this.reviews.reduce((acc, review) => {
+    return acc + review['foodQuality'];
+  }, 0);
 
-  const foodQuality = foodQualityData.reduce((acc, preview) => acc + preview, 0) / foodQualityData.length;
-  const serviceQuality = serviceQualityData.reduce((acc, preview) => acc + preview, 0) / serviceQualityData.length;
-  const interiorQuality = interiorQualityData.reduce((acc, preview) => acc + preview, 0) / interiorQualityData.length;
+  let serviceQuality = this.reviews.reduce((acc, review) => {
+    return acc + review['serviceQuality']
+  }, 0);
+
+  let interiorQuality = this.reviews.reduce((acc, review) => {
+    return acc + review['interiorQuality']
+  }, 0);
+
+  foodQuality = foodQuality === 0 ? 0 : foodQuality / this.reviews.length;
+  serviceQuality = serviceQuality === 0 ? 0 : serviceQuality / this.reviews.length;
+  interiorQuality = interiorQuality === 0 ? 0 : interiorQuality / this.reviews.length;
 
   const overallQuality = (foodQuality + serviceQuality + interiorQuality ) / 3;
 
