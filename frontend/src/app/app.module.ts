@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AppRoutingModule } from './app-routing.module';
 import { AppStoreModule } from './app-store.module';
 
@@ -29,6 +30,8 @@ import { LayoutComponent } from './ui/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ImagePipes } from './pipes/image.pipe';
+import { PlacesComponent } from './pages/places/places.component';
+import { PlaceItemComponent } from './pages/places/place-item/place-item.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,8 @@ import { ImagePipes } from './pipes/image.pipe';
     LoginComponent,
     RegisterComponent,
     ImagePipes,
+    PlacesComponent,
+    PlaceItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +67,7 @@ import { ImagePipes } from './pipes/image.pipe';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

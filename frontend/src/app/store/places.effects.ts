@@ -1,0 +1,46 @@
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, mergeMap } from 'rxjs';
+import { Router } from '@angular/router';
+import { HelpersService } from '../services/helpers.service';
+import { Store } from '@ngrx/store';
+import { AppState } from './types';
+import {
+  fetchPlacesFailure,
+  fetchPlacesRequest,
+  fetchPlacesSuccess,
+  getPlaceFailure,
+  getPlaceRequest,
+  getPlaceSuccess
+} from './places.actions';
+import { PlacesService } from '../services/places.service';
+
+@Injectable()
+export class PlacesEffects {
+
+  constructor(
+    private actions: Actions,
+    private router: Router,
+    private store: Store<AppState>,
+    private helpersService: HelpersService,
+    private placesService: PlacesService,
+  ) {
+  }
+
+  fetchPlaces = createEffect(() => this.actions.pipe(
+    ofType(fetchPlacesRequest),
+    mergeMap(() => this.placesService.fetchPlaces().pipe(
+      map((places) => fetchPlacesSuccess({ places })),
+      this.helpersService.catchServerError(fetchPlacesFailure),
+    )),
+  ));
+
+  getPlace = createEffect(() => this.actions.pipe(
+    ofType(getPlaceRequest),
+    mergeMap(({ id }) => this.placesService.getPlace(id).pipe(
+      map((place) => getPlaceSuccess({ place })),
+      this.helpersService.catchServerError(getPlaceFailure),
+    )),
+  ));
+
+}

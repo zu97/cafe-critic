@@ -1,0 +1,11 @@
+<mat-card class="place">
+  <a [routerLink]="['/places', place._id]" class="place-link">
+    <img mat-card-image [src]="place.photo | image" [alt]="place.title"/>
+    <mat-card-title>{{ place.title }}</mat-card-title>
+  </a>
+  <mat-card-content>
+    <p>({{ place.overallQuality }},  {{ place.reviews.length }} reviews)</p>
+    <p>{{ place.gallery.length }} photos</p>
+  </mat-card-content>
+</mat-card>
+

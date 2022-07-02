@@ -1,0 +1,29 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="header">
+  <h1>All places</h1>
+</div>
+
+<mat-card class="error" *ngIf="error | async">
+  {{ error | async }}
+</mat-card>
+
+<app-loader [isLoading]="isLoading | async" size="lg">
+  <div fxLayout="row wrap"
+       fxLayoutGap="16px"
+       fxLayoutAlign="center stretch"
+       *ngIf="(places | async)?.length; else emptyData"
+  >
+    <app-place-item
+      *ngFor="let place of places | async"
+      [place]="place"
+      class="place-item"
+    ></app-place-item>
+  </div>
+
+  <ng-template #emptyData>
+    <mat-card fxLayout="row" fxLayoutAlign="center">
+      <mat-card-subtitle>
+        No information available
+      </mat-card-subtitle>
+    </mat-card>
+  </ng-template>
+</app-loader>
