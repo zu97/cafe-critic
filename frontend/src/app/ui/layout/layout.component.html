@@ -1,0 +1,15 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <mat-toolbar color="primary"
+                 fxLayout="row"
+                 fxLayoutAlign="space-between center"
+    >
+      <a routerLink="/" class="logo">Cafe Critic</a>
+      <a routerLink="/register" mat-button>Register</a>
+      <a routerLink="/login" mat-button>Login</a>
+    </mat-toolbar>
+    <div class="content">
+      <ng-content></ng-content>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -7,6 +7,12 @@ import { MatCardModule } from '@angular/material/card';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppStoreModule } from './app-store.module';
 
@@ -19,6 +25,9 @@ import { ValidateIdenticalDirective } from './directives/validate-identical.dire
 import { IsAuthDirective } from './directives/is-auth.directive';
 import { HasRoleDirective } from './directives/has-role.directive';
 import { AuthInterceptor } from './auth.interceptor';
+import { LayoutComponent } from './ui/layout/layout.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +39,9 @@ import { AuthInterceptor } from './auth.interceptor';
     ValidateIdenticalDirective,
     IsAuthDirective,
     HasRoleDirective,
+    LayoutComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +54,12 @@ import { AuthInterceptor } from './auth.interceptor';
     FormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
