@@ -40,5 +40,16 @@
         Field is required
       </mat-error>
     </mat-form-field>
+    <div fxLayout="column" fxLayoutGap="16px">
+      <button type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="f.invalid || (loginLoading | async)"
+      >
+        <app-loader [isLoading]="loginLoading | async" size="sm">
+          Login
+        </app-loader>
+      </button>
+    </div>
   </form>
 </app-centered-card>

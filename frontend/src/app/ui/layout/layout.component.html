@@ -5,11 +5,23 @@
                  fxLayoutAlign="space-between center"
     >
       <a routerLink="/" class="logo">Cafe Critic</a>
-      <a routerLink="/register" mat-button>Register</a>
-      <a routerLink="/login" mat-button>Login</a>
+      <nav *appIsAuth="false; else userNav">
+        <a routerLink="/register" mat-button>Register</a>
+        <a routerLink="/login" mat-button>Login</a>
+      </nav>
     </mat-toolbar>
     <div class="content">
       <ng-content></ng-content>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-template #userNav>
+  <nav class="user-nav" *ngIf="user | async as $user">
+    <a routerLink="/" mat-button>
+      <span>Hello, {{ $user.displayName }}</span>
+    </a>
+    <a routerLink="/places/new" mat-button>Add new place</a>
+    <button type="button" mat-button (click)="logout()">Logout</button>
+  </nav>
+</ng-template>

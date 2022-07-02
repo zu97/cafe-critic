@@ -28,6 +28,7 @@ import { AuthInterceptor } from './auth.interceptor';
 import { LayoutComponent } from './ui/layout/layout.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { ImagePipes } from './pipes/image.pipe';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RegisterComponent } from './pages/register/register.component';
     LayoutComponent,
     LoginComponent,
     RegisterComponent,
+    ImagePipes,
   ],
   imports: [
     BrowserModule,
