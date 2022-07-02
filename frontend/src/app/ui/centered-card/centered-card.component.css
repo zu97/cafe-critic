@@ -1,0 +1,9 @@
+.centered-card {
+  max-width: 400px;
+  width: 100%;
+}
+
+.mat-card-title {
+  margin: 10px 0 16px !important;
+  text-align: center;
+}
