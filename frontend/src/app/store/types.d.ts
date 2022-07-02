@@ -26,6 +26,8 @@ export type PlacesState = {
   removeReviewError: null | string,
   addPhotoLoading: boolean,
   addPhotoError: null | string,
+  removePhotoLoading: boolean,
+  removePhotoError: null | string,
 };
 
 export type AppState = {

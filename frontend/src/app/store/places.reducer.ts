@@ -16,11 +16,8 @@ import {
   getPlaceFailure,
   getPlaceRequest,
   getPlaceSuccess,
-  removePlaceFailure,
-  removePlaceRequest,
-  removePlaceReviewFailure,
-  removePlaceReviewRequest,
-  removePlaceReviewSuccess,
+  removePlaceFailure, removePlaceGalleryPhotoFailure, removePlaceGalleryPhotoRequest, removePlaceGalleryPhotoSuccess,
+  removePlaceRequest, removePlaceReviewFailure, removePlaceReviewRequest, removePlaceReviewSuccess,
   removePlaceSuccess
 } from './places.actions';
 
@@ -41,6 +38,8 @@ const initialState: PlacesState = {
   removeReviewError: null,
   addPhotoLoading: false,
   addPhotoError: null,
+  removePhotoLoading: false,
+  removePhotoError: null,
 };
 
 export const placesReducer = createReducer(
@@ -76,5 +75,9 @@ export const placesReducer = createReducer(
   on(addPlaceGalleryPhotoRequest, state => ({ ...state, addPhotoLoading: true, addPhotoError: null })),
   on(addPlaceGalleryPhotoSuccess, state => ({ ...state, addPhotoLoading: false })),
   on(addPlaceGalleryPhotoFailure, (state, { error }) => ({ ...state, addPhotoLoading: false, addPhotoError: error })),
+
+  on(removePlaceGalleryPhotoRequest, state => ({ ...state, removePhotoLoading: true, removePhotoError: null })),
+  on(removePlaceGalleryPhotoSuccess, state => ({ ...state, removePhotoLoading: false })),
+  on(removePlaceGalleryPhotoFailure, (state, { error }) => ({ ...state, removePhotoLoading: false, removePhotoError: error })),
 
 );

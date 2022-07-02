@@ -1,11 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  AddPlaceData,
-  AddPlaceError,
-  AddPlaceGalleryPhotoData,
-  AddPlaceReviewData,
-  Place
-} from '../models/place.model';
+import { AddPlaceData, AddPlaceError, AddPlaceGalleryPhotoData, AddPlaceReviewData, Place } from '../models/place.model';
 
 export const fetchPlacesRequest = createAction(
   '[Places] Fetch Request'
@@ -90,5 +84,17 @@ export const addPlaceGalleryPhotoSuccess = createAction(
 );
 export const addPlaceGalleryPhotoFailure = createAction(
   '[Places] Add Gallery Photo Failure',
+  props<{ error: null | string }>()
+);
+
+export const removePlaceGalleryPhotoRequest = createAction(
+  '[Places] Remove Gallery Photo Request',
+  props<{ placeId: string, photoId: string }>()
+);
+export const removePlaceGalleryPhotoSuccess = createAction(
+  '[Places] Remove Gallery Photo Success'
+);
+export const removePlaceGalleryPhotoFailure = createAction(
+  '[Places] Remove Gallery Photo Failure',
   props<{ error: null | string }>()
 );

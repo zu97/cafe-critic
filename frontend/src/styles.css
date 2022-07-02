@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
 .header {
   margin-bottom: 16px;
   padding-bottom: 16px;

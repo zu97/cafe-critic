@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { BarRatingModule } from 'ngx-bar-rating';
+import { NgxGalleryModule } from 'ngx-gallery-9';
 import { AppRoutingModule } from './app-routing.module';
 import { AppStoreModule } from './app-store.module';
 
@@ -84,6 +85,7 @@ import { AddPhotoComponent } from './pages/place-details/add-photo/add-photo.com
     MatCheckboxModule,
     MatDividerModule,
     BarRatingModule,
+    NgxGalleryModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -21,11 +21,8 @@ import {
   getPlaceFailure,
   getPlaceRequest,
   getPlaceSuccess,
-  removePlaceFailure,
-  removePlaceRequest,
-  removePlaceReviewFailure,
-  removePlaceReviewRequest,
-  removePlaceReviewSuccess,
+  removePlaceFailure, removePlaceGalleryPhotoFailure, removePlaceGalleryPhotoRequest, removePlaceGalleryPhotoSuccess,
+  removePlaceRequest, removePlaceReviewFailure, removePlaceReviewRequest, removePlaceReviewSuccess,
   removePlaceSuccess
 } from './places.actions';
 import { PlacesService } from '../services/places.service';
@@ -103,5 +100,13 @@ export class PlacesEffects {
     )),
   ));
 
+  removePlaceGalleryPhoto = createEffect(() => this.actions.pipe(
+    ofType(removePlaceGalleryPhotoRequest),
+    mergeMap(({ placeId, photoId }) => this.placesService.removePlaceGalleryPhoto(placeId, photoId).pipe(
+      map(() => removePlaceGalleryPhotoSuccess()),
+      tap(() => this.store.dispatch(getPlaceRequest({ id: placeId }))),
+      this.helpersService.catchServerError(removePlaceGalleryPhotoFailure),
+    )),
+  ));
 
 }

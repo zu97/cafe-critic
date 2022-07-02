@@ -50,4 +50,8 @@ export class PlacesService {
     return this.http.post<Place>(env.apiUrl + '/places/' + placeId + '/gallery', formData);
   }
 
+  removePlaceGalleryPhoto(placeId: string, photoId: string) {
+    return this.http.delete(env.apiUrl + '/places/' + placeId + '/gallery/' + photoId);
+  }
+
 }

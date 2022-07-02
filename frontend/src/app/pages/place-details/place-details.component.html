@@ -13,6 +13,30 @@
         />
       </div>
     </mat-card>
+
+    <mat-card>
+      <mat-card-title>Gallery</mat-card-title>
+      <mat-card-content *ngIf="$place.gallery.length">
+        <ngx-gallery [options]="galleryOptionsAdmin"
+                     [images]="galleryImages"
+                     *appHasRole="['admin']; else isNotAdmin"
+        ></ngx-gallery>
+        <ng-template #isNotAdmin>
+          <ngx-gallery [options]="galleryOptions"
+                       [images]="galleryImages"
+          ></ngx-gallery>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+
+    <ng-container *ngIf="!$place.gallery.length">
+      <mat-card fxLayout="row" fxLayoutAlign="center">
+        <mat-card-subtitle>
+          No information available
+        </mat-card-subtitle>
+      </mat-card>
+    </ng-container>
+
     <mat-card>
       <mat-card-title>Ratings</mat-card-title>
       <mat-card-content>
@@ -38,8 +62,17 @@
         </div>
       </mat-card-content>
     </mat-card>
-    <app-reviews [place]="$place" fxLayout="column" fxLayoutGap="16px"></app-reviews>
-    <app-add-review [id]="$place._id" [allowReview]="isAllowSendReview" *appIsAuth="true"></app-add-review>
-    <app-add-photo [id]="$place._id" *appIsAuth="true"></app-add-photo>
+
+    <app-reviews [place]="$place"
+                 fxLayout="column"
+                 fxLayoutGap="16px"
+    ></app-reviews>
+    <app-add-review [id]="$place._id"
+                    [allowReview]="isAllowSendReview"
+                    *appIsAuth="true"
+    ></app-add-review>
+    <app-add-photo [id]="$place._id"
+                   *appIsAuth="true"
+    ></app-add-photo>
   </div>
 </app-loader>

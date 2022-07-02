@@ -4,8 +4,10 @@ import { Place } from '../../models/place.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/types';
 import { ActivatedRoute } from '@angular/router';
-import { getPlaceRequest } from '../../store/places.actions';
+import { getPlaceRequest, removePlaceGalleryPhotoRequest } from '../../store/places.actions';
 import { User } from '../../models/user.model';
+import { NgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery-9';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-place-details',
@@ -14,14 +16,18 @@ import { User } from '../../models/user.model';
 })
 export class PlaceDetailsComponent implements OnInit {
   place: Observable<null | Place>;
+
   isAllowSendReview = false;
+  galleryOptionsAdmin: NgxGalleryOptions[] = [];
+  galleryOptions: NgxGalleryOptions[] = [];
+  galleryImages: NgxGalleryImage[] = [];
 
   isLoading: Observable<boolean>;
   error: Observable<null | string>;
 
   private user: Observable<null | User>;
   private userData: null | User = null;
-  private placeData: null | Place = null;
+  private placeData!: Place;
 
   private userSub!: Subscription;
   private placeSub!: Subscription;
@@ -43,14 +49,37 @@ export class PlaceDetailsComponent implements OnInit {
     });
 
     this.placeSub = this.place.subscribe((place) => {
+      if (!place) {
+        return;
+      }
+
       this.placeData = place;
       this.checkAccessSendReview();
+      this.loadingGalleryImages();
     });
 
     this.userSub = this.user.subscribe((user) => {
       this.userData = user;
       this.checkAccessSendReview();
     });
+
+    this.galleryOptions = [{
+      'image': false,
+      'width': '100%',
+      'height': '150px',
+    }];
+    this.galleryOptionsAdmin = [{
+      'image': false,
+      'width': '100%',
+      'height': '150px',
+      thumbnailActions: [{
+        titleText: 'Remove',
+        icon: 'fa fa-solid fa-trash',
+        onClick: (_, index) => {
+          this.onRemoveGalleryPhoto(index);
+        }
+      }]
+    }];
   }
 
   checkAccessSendReview(): void {
@@ -63,6 +92,29 @@ export class PlaceDetailsComponent implements OnInit {
     });
 
     this.isAllowSendReview = !checkUserReview;
+  }
+
+  loadingGalleryImages(): void {
+    const images = this.placeData.gallery.map((photo) => {
+      const url = environment.apiUrl + '/uploads/' + photo.photo;
+      return { small: url, medium: url, big: url };
+    });
+
+    if (images) {
+      this.galleryImages = images;
+    }
+  }
+
+  onRemoveGalleryPhoto(photoIndex: number): void {
+    const galleryPhoto = this.placeData.gallery[photoIndex];
+    if (!galleryPhoto) {
+      return;
+    }
+
+    this.store.dispatch(removePlaceGalleryPhotoRequest({
+      placeId: this.placeData._id,
+      photoId: galleryPhoto._id,
+    }));
   }
 
 }
