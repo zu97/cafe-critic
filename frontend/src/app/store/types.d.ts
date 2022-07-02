@@ -18,6 +18,8 @@ export type PlacesState = {
   getError: null | string,
   addPlaceLoading: boolean,
   addPlaceError: null | AddPlaceError,
+  removeLoading: false | string,
+  removeError: null | string,
 };
 
 export type AppState = {

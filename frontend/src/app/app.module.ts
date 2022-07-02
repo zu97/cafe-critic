@@ -14,6 +14,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDividerModule } from '@angular/material/divider';
+import { BarRatingModule } from 'ngx-bar-rating';
 import { AppRoutingModule } from './app-routing.module';
 import { AppStoreModule } from './app-store.module';
 
@@ -70,6 +72,8 @@ import { AddPlaceComponent } from './pages/add-place/add-place.component';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatDividerModule,
+    BarRatingModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

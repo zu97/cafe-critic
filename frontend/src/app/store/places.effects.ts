@@ -14,7 +14,10 @@ import {
   fetchPlacesSuccess,
   getPlaceFailure,
   getPlaceRequest,
-  getPlaceSuccess
+  getPlaceSuccess,
+  removePlaceFailure,
+  removePlaceRequest,
+  removePlaceSuccess
 } from './places.actions';
 import { PlacesService } from '../services/places.service';
 
@@ -52,6 +55,15 @@ export class PlacesEffects {
       map(() => addPlaceSuccess()),
       tap(() => void this.router.navigate(['/'])),
       this.helpersService.catchServerError(addPlaceFailure),
+    )),
+  ));
+
+  removePlace = createEffect(() => this.actions.pipe(
+    ofType(removePlaceRequest),
+    mergeMap(({ id }) => this.placesService.removePlace(id).pipe(
+      map(() => removePlaceSuccess()),
+      tap(() => this.store.dispatch(fetchPlacesRequest())),
+      this.helpersService.catchServerError(removePlaceFailure),
     )),
   ));
 

@@ -37,3 +37,15 @@ export const addPlaceFailure = createAction(
   '[Places] Add Failure',
   props<{ error: null | AddPlaceError }>()
 );
+
+export const removePlaceRequest = createAction(
+  '[Places] Remove Request',
+  props<{ id: string }>()
+);
+export const removePlaceSuccess = createAction(
+  '[Places] Remove Success'
+);
+export const removePlaceFailure = createAction(
+  '[Places] Remove Failure',
+  props<{ error: null | string }>()
+);

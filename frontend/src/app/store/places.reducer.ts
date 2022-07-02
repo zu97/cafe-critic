@@ -9,7 +9,10 @@ import {
   fetchPlacesSuccess,
   getPlaceFailure,
   getPlaceRequest,
-  getPlaceSuccess
+  getPlaceSuccess,
+  removePlaceFailure,
+  removePlaceRequest,
+  removePlaceSuccess
 } from './places.actions';
 
 const initialState: PlacesState = {
@@ -21,6 +24,8 @@ const initialState: PlacesState = {
   getError: null,
   addPlaceLoading: false,
   addPlaceError: null,
+  removeLoading: false,
+  removeError: null,
 };
 
 export const placesReducer = createReducer(
@@ -36,5 +41,9 @@ export const placesReducer = createReducer(
   on(addPlaceRequest, state => ({ ...state, addLoading: true, addError: null })),
   on(addPlaceSuccess, state => ({ ...state, addLoading: false })),
   on(addPlaceFailure, (state, { error }) => ({ ...state, addLoading: false, addError: error })),
+
+  on(removePlaceRequest, (state, { id }) => ({ ...state, removeLoading: id, removeError: null })),
+  on(removePlaceSuccess, state => ({ ...state, removeLoading: false })),
+  on(removePlaceFailure, (state, { error }) => ({ ...state, removeLoading: false, removeError: error })),
 
 );

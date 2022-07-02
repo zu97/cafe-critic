@@ -4,8 +4,22 @@
     <mat-card-title>{{ place.title }}</mat-card-title>
   </a>
   <mat-card-content>
+    <p><bar-rating [rate]="place.overallQuality" [readOnly]="true"></bar-rating></p>
     <p>({{ place.overallQuality }},  {{ place.reviews.length }} reviews)</p>
     <p>{{ place.gallery.length }} photos</p>
   </mat-card-content>
+  <ng-container *appHasRole="['admin']">
+    <mat-divider inset></mat-divider>
+    <mat-card-actions fxLayoutAlign="center">
+      <button type="button"
+              mat-flat-button
+              color="warn"
+              (click)="onRemove()"
+              [disabled]="removeLoading | async"
+      >
+        <app-loader [isLoading]="removeLoading | async">Remove</app-loader>
+      </button>
+    </mat-card-actions>
+  </ng-container>
 </mat-card>
 
